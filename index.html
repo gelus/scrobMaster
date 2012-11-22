@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="scrobMaster.js"></script>
+		<script>
+			scrob.register('bob2').on({
+				'enter': function(scrob){this.elm.style.backgroundColor = "blue"},
+				'exit': function(scrob){this.elm.style.backgroundColor = "white"}
+			}).addon({
+				'enter': function(scrob){this.elm.style.border = "solid 10px red"}
+			})
+		</script>
+		<style>
+			.bob{
+				border: solid 1px blue;
+				height: 1200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="bob" id="bob1"></div>
+		<div class="bob" id="bob2"></div>
+		<div class="bob" id="bob3"></div>
+	</body>
+</html>
