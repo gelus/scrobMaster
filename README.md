@@ -138,7 +138,7 @@ example
 scrollState is updated on scroll and passed in to each event methode defined when triggerd. 
 Properties:
 <ul>
-	scrollState.direction = direction of scroll.
-	scrollState.scrollTop = current scrollTop of window
-	scrollState.lastScrollTop = previous scrollTop of window.
+	<li>scrollState.direction = direction of scroll.</li>
+	<li>scrollState.scrollTop = current scrollTop of window</li>
+	<li>scrollState.lastScrollTop = previous scrollTop of window.</li>
 </ul>
