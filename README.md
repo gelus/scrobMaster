@@ -4,26 +4,30 @@ Master your scroll events based on the elements you are affecting.<br />
 ScrobMaster allows you to attach events to scroll points based off registered DOM elements.
 
 <h3>Overview:</h3>
-ScrobMaster works with elements that have been registered with ScrobMaster to create "Scrobjects". Each Scrobject has six adjustible trigger points that you can attach events to be executed when scrolled over.
+ScrobMaster works with elements that have been registered create "Scrobjects". 
+Each Scrobject has two adjustable zones that each have three atachable events each. 
+Events are executed when the page's setable trigger point enters, exits or scrolls in one of the scrobjects zones.
 <pre>
-	attachable events: bufferEnter, bufferStep, bufferExit, enter, step, exit
+	events: bufferEnter, bufferStep, bufferExit, enter, step, exit
+	
+	Buffer Zone: the space between bufferTop and bufferBottom
+	live Zone: the space between top and bottom
 	
 	         Window
 	------------------------
-	|  ....................|....... bufferEnter
+	|  ....................|....... bufferTop
 	|  .                   |
-	|  .                   |        bufferStep is triggered for every scroll
-	|  .                   |        in between bufferEnter and bufferExit
+	|  .                   |        Buffer Zone
 	|  .                   |
-	|  ------------------..|....... enter
+	|  ------------------..|....... top
 	|  |     Elmenet    |  |
-	|  |                |  |        step is triggered for every scroll
-	|  |                |  |        in between enter and exit
+	|  |                |  |        live Zone
 	|  |                |  |
-	|  ------------------..|....... exit
+	|  ------------------..|....... bottom
 	|  .                   |
-	|  ....................|....... bufferExit
+	|  ....................|....... bufferBottom
 	------------------------
+	
 </pre>
 
 <h5>Basic Use:</h5>
@@ -71,7 +75,8 @@ Chainable.
 	//Register example:
 	scrob.register('bob2');
 	//returns scrob.bob2
-	/access a scrobject:
+	
+	//access a scrobject:
 	scrob.bob2 || scrob['bob2']
 
 </pre>
@@ -79,10 +84,11 @@ Chainable.
 <h5>setTriggerPos</h5>
 <pre>scrob.setTriggerPos(int);</pre>
 Sets the windows trigger position.
-Defaults to 0. Returns ScrobMaster or Scrobject it was called on.
+Defaults to 0 or the top of the window.
+Chainable Returns ScrobMaster or Scrobject it was called on.
 
 <h5>getScrollTop</h5>
-<pre>scrob.getScrollTop</pre>
+<pre>scrob.getScrollTop()</pre>
 Not Chainable.
 Returns the current scroll position of the window.
 
@@ -96,7 +102,7 @@ set properties and or events for your scrobject.<br />
 accepts object with prop:val pairs<br />
 Chainable, returns scrobject called on.<br />
 
-Setable properties : expected val - description
+Setable properties:
 <ul>
 	<li>elm : DOM element - element events will affect.</li>
 	<li>top: integer  - top trigger point relative to elm</li>
@@ -107,7 +113,7 @@ Setable properties : expected val - description
 
 Note - if top is set to a value less than bufferTop; bufferTop will also be set to the given value. The reverse is true for bottom and bufferBottom
 
-Attachable methodes - description, expects functions
+Attachable methodes:
 <ul>
 	 <li>bufferEnter - triggered when buffer zone is entered from top or bottom</li>
 	 <li>bufferStep - triggered on scroll in buffer zone</li>
