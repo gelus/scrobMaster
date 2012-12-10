@@ -67,6 +67,7 @@
 			ob.bufferTop = (ob.bufferTop)? ob.bufferTop:0;
 			ob.bufferBottom = (ob.bufferBottom)? ob.bufferBottom:0;
 			ob.elm = elm;
+			ob.style = elm.style;
 		}
 		this.addon = function(prop, val){
 			if(typeof prop == "string"){

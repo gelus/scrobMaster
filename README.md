@@ -44,12 +44,12 @@ Events are executed when the page's setable trigger point enters, exits or scrol
 		// Set the enter event to change the background color
 		// based on the direction of the scroll when event it triggered.
 		scrob.bob2.on('enter', function(scrollState){
-			this.elm.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";
+			this.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";
 		});
 
 		// Set exit event to revert the background color to white.
 		scrob.bob2.on('exit', function(scrollState){
-			this.elm.style.backgroundColor = "white";
+			this.style.backgroundColor = "white";
 		});
 	</script>
 </pre>
@@ -59,8 +59,8 @@ For ease of use ScrobMaster methodes can be chained and most accept objects to a
 	<script>
 		scrob.register('bob2').set({
 			'bufferTop': -100,
-			'enter': function(scrollState){this.elm.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";},
-			'exit': function(scrollState){this.elm.style.backgroundColor = "white";}
+			'enter': function(scrollState){this.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";},
+			'exit': function(scrollState){this.style.backgroundColor = "white";}
 		});
 	</script>
 </pre>
@@ -140,7 +140,18 @@ example
 	//Will log both 'one' and 'two' when enter is triggered
 </pre>
 
-<h3>ScrobMaster scrollState</h3>
+<h5>elm</h5>
+<pre>scrob.bob2.elm</pre>
+The element that the scrobject affects
+
+<h5>style</h5>
+<pre>scrob.bob2.style</pre>
+Shorthand to the affected elements style attribute.
+
+
+<h3>Inside the event handler function</h3>
+Here is some information about the handlers you pass when setting events:
+<h5>ScrobMaster scrollState argument</h5>
 scrollState is updated on scroll and passed in to each event methode defined when triggerd. 
 Properties:
 <ul>
@@ -148,3 +159,17 @@ Properties:
 	<li>scrollState.scrollTop = current scrollTop of window</li>
 	<li>scrollState.lastScrollTop = previous scrollTop of window.</li>
 </ul>
+
+<h5>this</h5>
+Inside of a handler function "this" referes to the scrobject you are affecting.
+<pre>
+	//an example:
+
+	scrob.bob2.set({
+		'enter': function(state){
+			this.on('exit', function(state){this.style.border = "none"}),
+			this.style.border = "solid 2px red";
+		}
+	});
+
+</pre>
