@@ -4,8 +4,8 @@ Master your scroll events based on the elements you are affecting.<br />
 ScrobMaster allows you to attach events to scroll points based off registered DOM elements.
 
 <h3>Overview:</h3>
-ScrobMaster works with elements that have been registered create "Scrobjects". 
-Each Scrobject has two adjustable zones that each have three atachable events each. 
+ScrobMaster works with elements that have been registered to create "Scrobjects". 
+Each Scrobject has two adjustable zones that each have three attachable events each. 
 Events are executed when the page's setable trigger point enters, exits or scrolls in one of the scrobjects zones.
 <pre>
 	events: bufferEnter, bufferStep, bufferExit, enter, step, exit
