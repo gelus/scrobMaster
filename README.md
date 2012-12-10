@@ -6,7 +6,7 @@ ScrobMaster allows you to attach events to scroll points based off registered DO
 <h3>Overview:</h3>
 ScrobMaster works with elements that have been registered to create "Scrobjects". 
 Each Scrobject has two adjustable zones that each have three attachable events each. 
-Events are executed when the page's setable trigger point enters, exits or scrolls in one of the scrobjects zones.
+Events are executed when the page's settable trigger point enters, exits or scrolls in one of the scrobjects zones.
 <pre>
 	events: bufferEnter, bufferStep, bufferExit, enter, step, exit
 	
@@ -20,7 +20,7 @@ Events are executed when the page's setable trigger point enters, exits or scrol
 	|  .                   |        Buffer Zone
 	|  .                   |
 	|  ------------------..|....... top
-	|  |     Elmenet    |  |
+	|  |     Element    |  |
 	|  |                |  |        live Zone
 	|  |                |  |
 	|  ------------------..|....... bottom
@@ -53,7 +53,7 @@ Events are executed when the page's setable trigger point enters, exits or scrol
 		});
 	</script>
 </pre>
-For ease of use ScrobMaster methodes can be chained and most accept objects to attach multiple events and set multiple properties at once. So the above could be reduced to:
+For ease of use ScrobMaster methods can be chained and most accept objects to attach multiple events and set multiple properties at once. So the above could be reduced to:
 <pre>
 	<script src="scrobMaster.js"></script>
 	<script>
@@ -64,13 +64,13 @@ For ease of use ScrobMaster methodes can be chained and most accept objects to a
 		});
 	</script>
 </pre>
-Please note: In the examples above to raise the bufferEnter's trigger point a negative value was used. This is because ScrobMaster positioning is bassed off scrollTop, Larger numbers are further down on the page and the oposite for smaller. The top of the page being located at 0.
+Please note: In the examples above to raise the bufferEnter's trigger point a negative value was used. This is because ScrobMaster positioning is based off scrollTop, Larger numbers are further down on the page and the opposite for smaller. The top of the page being located at 0.
 <h3>ScrobMaster API</h3>
 <h5>Register</h5>
 <pre>scrob.register("elementID");</pre>
 Registers and returns a new Scrobject on the scrobMaster.
-Registered elements are accessible off the scrobMaster via the ID passed into the register methode.
-Chainable.
+Registered elements are accessible off the scrobMaster via the ID passed into the register method.
+Chain-able.
 <pre>
 	//Register example:
 	scrob.register('bob2');
@@ -85,24 +85,24 @@ Chainable.
 <pre>scrob.setTriggerPos(int);</pre>
 Sets the windows trigger position.
 Defaults to 0 or the top of the window.
-Chainable Returns ScrobMaster or Scrobject it was called on.
+Chain-able Returns ScrobMaster or Scrobject it was called on.
 
 <h5>getScrollTop</h5>
 <pre>scrob.getScrollTop()</pre>
-Not Chainable.
+Not Chain-able.
 Returns the current scroll position of the window.
 
 <h3>ScrobJect API</h3>
-Methods outlined below are called off a registered scrobject, eg. scrob.bob2.methodeCall();
+Methods outlined below are called off a registered scrobject, eg. scrob.bob2.methodCall();
 
 <h5>set</h5>
 <pre>scrob.bob2.set(property[, val])</pre>
 
 set properties and or events for your scrobject.<br />
 accepts object with prop:val pairs<br />
-Chainable, returns scrobject called on.<br />
+Chain-able, returns scrobject called on.<br />
 
-Setable properties:
+Settable properties:
 <ul>
 	<li>elm : DOM element - element events will affect.</li>
 	<li>top: integer  - top trigger point relative to elm</li>
@@ -113,7 +113,7 @@ Setable properties:
 
 Note - if top is set to a value less than bufferTop; bufferTop will also be set to the given value. The reverse is true for bottom and bufferBottom
 
-Attachable methodes:
+Attachable methods:
 <ul>
 	 <li>bufferEnter - triggered when buffer zone is entered from top or bottom</li>
 	 <li>bufferStep - triggered on scroll in buffer zone</li>
@@ -122,16 +122,16 @@ Attachable methodes:
 	 <li>step - Triggered on scroll in live zone</li>
 	 <li>exit - triggered when live zone is exited from top or bottom</li>
 </ul>
-Event methode functions accept the current ScobMaster scrollState, described below, as their only parameter
+Event method functions accept the current ScobMaster scrollState, described below, as their only parameter
 
 <h5>on</h5>
-<pre>scrob.bob2.on(methode[, val])</pre>
-Syntactical alias for set - Used to assign scoll events<br />
-Chainable, returns scrobject called on.
+<pre>scrob.bob2.on(method[, val])</pre>
+Syntactical alias for set - Used to assign scroll events<br />
+Chain-able, returns scrobject called on.
 <h5>addon</h5>
-<pre>scrob.bob2.addon(methode[, val])</pre>
-Similar to the "on" methode, used to assign scroll events in addtion to previously defined handles rather than replace them.<br />
-Chainable, returns scrobject called on.<br />
+<pre>scrob.bob2.addon(method[, val])</pre>
+Similar to the "on" method, used to assign scroll events in addition to previously defined handles rather than replace them.<br />
+Chain-able, returns scrobject called on.<br />
 example
 <pre>
 	scrob.register('bob2');
@@ -152,8 +152,8 @@ Shorthand to the affected elements style attribute.
 <h3>Inside the event handler function</h3>
 Here is some information about the handlers you pass when setting events:
 <h5>ScrobMaster scrollState argument</h5>
-scrollState is updated on scroll and passed in to each event methode defined when triggerd. 
-Properties:
+scrollState is updated on scroll and passed in to each event method defined when trigged. 
+Property
 <ul>
 	<li>scrollState.direction = direction of scroll.</li>
 	<li>scrollState.scrollTop = current scrollTop of window</li>
@@ -161,7 +161,7 @@ Properties:
 </ul>
 
 <h5>this</h5>
-Inside of a handler function "this" referes to the scrobject you are affecting.
+Inside of a handler function "this" refers to the scrobject you are affecting.
 <pre>
 	//an example:
 
