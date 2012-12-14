@@ -5,7 +5,7 @@ ScrobMaster allows you to attach events to scroll points based off registered DO
 
 <h3>Overview:</h3>
 ScrobMaster works with elements that have been registered to create "Scrobjects". 
-Each Scrobject has two adjustable zones that each have three attachable events each. 
+Each Scrobject has two adjustable zones that each have three attachable events. 
 Events are executed when the page's settable trigger point enters, exits or scrolls in one of the scrobjects zones.
 <pre>
 	events: bufferEnter, bufferStep, bufferExit, enter, step, exit
