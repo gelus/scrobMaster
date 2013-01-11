@@ -31,7 +31,7 @@
         D = (D.clientHeight)? D: B;
         return D.scrollTop;
 		   }
-		},
+		};
 		this.register = function(elmID){
 				var self = scrob;
 				self[elmID] = new scrobject(elmID);
@@ -42,7 +42,7 @@
 				}
 
 				return self[elmID];
-		}
+		},
 		this.setTriggerPos = function(val){
 			scrob.triggerPos = val||0;
 			return this;
@@ -56,17 +56,25 @@
 		this.resolvedTop = function(){return this.absoluteTop+this.top};
 		this.resolvedBottom = function(){return this.absoluteBottom+this.bottom};
 		this.resolvedBufferBottom = function(){return this.absoluteBottom+this.bufferBottom};
+		this.getAbsoluteTop = function(){
+			var parent = this.elm.offsetParent,
+					top = this.elm.offsetTop;
+			while(parent !== document.body){
+				top += parent.offsetTop;
+				parent = parent.offsetParent;
+			}
+			return top;
+		};
 		this.initiate = function(elmID){
 			var elm = (elmID)? document.getElementById(elmID):this.elm;
-			console.log(elm);
 			var ob = this;
-			ob.absoluteTop = (ob.absoluteTop)? ob.absoluteTop:elm.offsetTop;
-			ob.absoluteBottom = (ob.absoluteBottom)? ob.absoluteBottom:elm.offsetTop+elm.offsetHeight;
+			ob.elm = elm;
+			ob.absoluteTop = (ob.absoluteTop)? ob.absoluteTop:ob.getAbsoluteTop();
+			ob.absoluteBottom = (ob.absoluteBottom)? ob.absoluteBottom:ob.getAbsoluteTop()+elm.offsetHeight;
 			ob.top = (ob.top)? ob.top:0;
 			ob.bottom = (ob.bottom)? ob.bottom:0;
 			ob.bufferTop = (ob.bufferTop)? ob.bufferTop:0;
 			ob.bufferBottom = (ob.bufferBottom)? ob.bufferBottom:0;
-			ob.elm = elm;
 			ob.style = elm.style;
 		}
 		this.addon = function(prop, val){
