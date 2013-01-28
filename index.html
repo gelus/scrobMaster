@@ -3,23 +3,44 @@
 	<head>
 		<script src="scrobMaster.js"></script>
 		<script>
-			scrob.register('bob2').on({
-				'enter': function(scrob){this.elm.style.backgroundColor = "blue"},
-				'exit': function(scrob){this.elm.style.backgroundColor = "white"}
-			}).addon({
-				'enter': function(scrob){this.elm.style.border = "solid 10px red"}
-			})
+			scrob.register('bob2').addon({
+			'enter': function(scrollState){ this.elm.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";},
+			'exit': function(scrollState){ this.elm.style.backgroundColor = "green";}
+		}).register('nestedBob').on({
+			'enter': function(){
+				this.style.backgroundColor = "#FFF"
+				console.log("in", this.absoluteTop);
+			},
+			'exit': function(){
+				this.style.backgroundColor = "#000"
+				console.log("out", this.absoluteBottom);
+			}
+		})
 		</script>
 		<style>
 			.bob{
+				position: relative;
 				border: solid 1px blue;
 				height: 1200px;
+				margin: 100px;
+				padding: 100px;
+			}
+			#nestedBob{
+				position: absolute;
+				top: 200px;
+				left: 50%;
+				width: 200px;
+				margin-left: -100px;
+				border: solid 1px red;
+				height: 300px;				
 			}
 		</style>
 	</head>
 	<body>
 		<div class="bob" id="bob1"></div>
-		<div class="bob" id="bob2"></div>
+		<div class="bob" id="bob2">
+				<div id="nestedBob"></div>
+		</div>
 		<div class="bob" id="bob3"></div>
 	</body>
 </html>
