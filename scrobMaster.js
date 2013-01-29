@@ -7,6 +7,15 @@
 	function scrobMasterProto(){
 		this.triggerPos = 0;
 		this.state = {},
+		this.execute = function(funcs, key){
+			if(Object.prototype.toString.call(funcs) == "[object Array]"){
+				for(var i = 0, len = funcs.length; i<len; i++){
+					funcs[i].call(scrob[key], this.state);
+				}
+				return
+			}
+			funcs.call(scrob[key], this.state);
+		}
 		this.triggerPoint = function(){
 			return this.getScrollTop() + this.triggerPos;
 		}
@@ -18,7 +27,7 @@
         D = (D.clientHeight)? D: B;
         return D.scrollTop;
 		   }
-		}
+		};
 		this.register = function(elmID){
 				var self = scrob;
 				self[elmID] = new scrobject(elmID);
@@ -29,7 +38,7 @@
 				}
 
 				return self[elmID];
-		}
+		},
 		this.setTriggerPos = function(val){
 			scrob.triggerPos = val||0;
 			return this;
@@ -122,25 +131,25 @@
 			if(scrob.hasOwnProperty(key) && scrob[key] instanceof scrobject){
 				if(scrob[key].resolvedBufferTop() < trigger && scrob[key].resolvedBufferBottom() > trigger){
 					if(!scrob[key].bufferEnetered){
-						if(scrob[key].bufferEnter){scrob[key].bufferEnter.call(scrob[key], scrob.state)}//Buffer Enter Event
+						if(scrob[key].bufferEnter)scrob.execute(scrob[key].bufferEnter, key);//Buffer Enter Event
 						scrob[key].bufferEnetered = true;
 					}
-					if(scrob[key].bufferStep){scrob[key].bufferStep.call(scrob[key], scrob.state)}//Buffer Step Event
+					if(scrob[key].bufferStep)scrob.execute(scrob[key].bufferStep, key);//Buffer Step Event
 					if(scrob[key].resolvedTop() < trigger && scrob[key].resolvedBottom() > trigger){
 						if(!scrob[key].entered){
-							if(scrob[key].enter){scrob[key].enter.call(scrob[key], scrob.state)}// Enter Event
+							if(scrob[key].enter){scrob.execute(scrob[key].enter, key)}//scrob[key].enter();// Enter Event
 							scrob[key].entered = true;
 						}
-						if(scrob[key].step){scrob[key].step.call(scrob[key], scrob.state)}//Step Event
+						if(scrob[key].step)scrob.execute(scrob[key].step, key);//Step Event
 					}else if(scrob[key].entered){
-						if(scrob[key].exit){scrob[key].exit.call(scrob[key], scrob.state)}//Exit Event
+						if(scrob[key].exit)scrob.execute(scrob[key].exit, key);//Exit Event
 						delete scrob[key].entered;
 					}//close live zone
 				}else if(scrob[key].bufferEnetered){
-					if(scrob[key].entered){if(scrob[key].exit){scrob[key].exit.call(scrob[key], scrob.state)}//Exit Event
+					if(scrob[key].entered){if(scrob[key].exit)scrob.execute(scrob[key].exit, key);//Exit Event
 						delete scrob[key].entered;
 					}
-					if(scrob[key].bufferExit){scrob[key].bufferExit.call(scrob[key], scrob.state)}// Buffer Exit Event
+					if(scrob[key].bufferExit)scrob.execute(scrob[key].bufferExit, key);// Buffer Exit Event
 					delete scrob[key].bufferEnetered;
 				}//close buffer zone
 			}
