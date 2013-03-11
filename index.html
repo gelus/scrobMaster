@@ -6,16 +6,28 @@
 			scrob.register('bob2').addon({
 			'enter': function(scrollState){ this.elm.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";},
 			'exit': function(scrollState){ this.elm.style.backgroundColor = "green";}
-		}).register('nestedBob').on({
+		}).register('#nestedBob').on({
 			'enter': function(){
 				this.style.backgroundColor = "#FFF"
-				console.log("in", this.absoluteTop);
+				//console.log("in", this.absoluteTop);
 			},
 			'exit': function(){
 				this.style.backgroundColor = "#000"
-				console.log("out", this.absoluteBottom);
+				//console.log("out", this.absoluteBottom);
 			}
-		})
+		}).addon('enter', function(state){this.style.border = "solid 2px yellow";});
+
+		scrob.register('.classBob').set({
+			'top': -200,
+			'bottom': -200,
+			'enter': function(state){this.style.backgroundColor = "gray";},
+			'exit': function(state){this.style.backgroundColor = "white";}
+		}).register('.classBob2').on({
+			'top': -200,
+			'bottom': -200,
+			'enter': function(state){this.style.backgroundColor = "red";},
+			'exit': function(state){this.style.backgroundColor = "white";}
+		});
 		</script>
 		<style>
 			.bob{
@@ -34,10 +46,59 @@
 				border: solid 1px red;
 				height: 300px;				
 			}
+			.classBob{
+				position: absolute;
+				height: 50px;
+				width: 50px;
+				border: solid 1px gray;
+			}
+			#classBob1{left: 20px;bottom: 20px;}
+			#classBob2{left: 90px;bottom: 60px;}
+			#classBob3{left: 160px;bottom: 100px;}
+			#classBob13{left: 230px;bottom: 140px;}
+			#classBob14{left: 300px;bottom: 180px;}
+			#classBob15{left: 370px;bottom: 220px;}
+			#classBob16{left: 440px;bottom: 260px;}
+			#classBob17{left: 510px;bottom: 300px;}
+			#classBob18{left: 580px;bottom: 340px;}
+			.classBob2{
+				position: absolute;
+				height: 50px;
+				width: 50px;
+				border: solid 1px gray;
+			}
+			#classBob4{right: 20px;bottom: 20px;}
+			#classBob5{right: 90px;bottom: 60px;}
+			#classBob6{right: 160px;bottom: 100px;}
+			#classBob7{right: 230px;bottom: 140px;}
+			#classBob8{right: 300px;bottom: 180px;}
+			#classBob9{right: 370px;bottom: 220px;}
+			#classBob10{right: 440px;bottom: 260px;}
+			#classBob11{right: 510px;bottom: 300px;}
+			#classBob12{right: 580px;bottom: 340px;}
 		</style>
 	</head>
 	<body>
-		<div class="bob" id="bob1"></div>
+		<div class="bob" id="bob1">
+			<div class="classBob" id="classBob1"></div>
+			<div class="classBob" id="classBob2"></div>
+			<div class="classBob" id="classBob3"></div>
+			<div class="classBob" id="classBob13"></div>
+			<div class="classBob" id="classBob14"></div>
+			<div class="classBob" id="classBob15"></div>
+			<div class="classBob" id="classBob16"></div>
+			<div class="classBob" id="classBob17"></div>
+			<div class="classBob" id="classBob18"></div>
+			<div class="classBob2" id="classBob4"></div>
+			<div class="classBob2" id="classBob5"></div>
+			<div class="classBob2" id="classBob6"></div>
+			<div class="classBob2" id="classBob7"></div>
+			<div class="classBob2" id="classBob8"></div>
+			<div class="classBob2" id="classBob9"></div>
+			<div class="classBob2" id="classBob10"></div>
+			<div class="classBob2" id="classBob11"></div>
+			<div class="classBob2" id="classBob12"></div>
+		</div>
 		<div class="bob" id="bob2">
 				<div id="nestedBob"></div>
 		</div>

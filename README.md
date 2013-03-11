@@ -65,9 +65,14 @@ For ease of use ScrobMaster methods can be chained and most accept objects to at
 	</script>
 </pre>
 Please note: In the examples above to raise the bufferEnter's trigger point a negative value was used. This is because ScrobMaster positioning is based off scrollTop, Larger numbers are further down on the page and the opposite for smaller. The top of the page being located at 0.
+<hr>
 <h3>ScrobMaster API</h3>
 <h5>Register</h5>
-<pre>scrob.register("elementID");</pre>
+<pre>
+	scrob.register("elementID");
+	scrob.register("#elementID");
+	scrob.register(".className");
+</pre>
 Registers and returns a new Scrobject on the scrobMaster.
 Registered elements are accessible off the scrobMaster via the ID passed into the register method.
 Chain-able.
@@ -91,12 +96,15 @@ Chain-able Returns ScrobMaster or Scrobject it was called on.
 <pre>scrob.getScrollTop()</pre>
 Not Chain-able.
 Returns the current scroll position of the window.
-
+<hr>
 <h3>ScrobJect API</h3>
 Methods outlined below are called off a registered scrobject, eg. scrob.bob2.methodCall();
 
 <h5>set</h5>
-<pre>scrob.bob2.set(property[, val])</pre>
+<pre>
+	scrob.bob2.set(property[, val])
+	scrob.bob2.set({"property":val });
+</pre>
 
 set properties and or events for your scrobject.<br />
 accepts object with prop:val pairs<br />
@@ -125,12 +133,20 @@ Attachable methods:
 Event method functions accept the current ScobMaster scrollState, described below, as their only parameter
 
 <h5>on</h5>
-<pre>scrob.bob2.on(method[, val])</pre>
+<pre>
+	scrob.bob2.on(method[, val])
+	scrob.bob2.on({"method":val})
+</pre>
 Syntactical alias for set - Used to assign scroll events<br />
+accepts object with prop:val pairs<br />
 Chain-able, returns scrobject called on.
 <h5>addon</h5>
-<pre>scrob.bob2.addon(method[, val])</pre>
+<pre>
+	scrob.bob2.addon(method[, val])
+	scrob.bob2.addon({"method":val})
+</pre>
 Similar to the "on" method, used to assign scroll events in addition to previously defined handles rather than replace them.<br />
+accepts objects with prop:val pairs<br />
 Chain-able, returns scrobject called on.<br />
 example
 <pre>
@@ -148,9 +164,9 @@ The element that the scrobject affects
 <pre>scrob.bob2.style</pre>
 Shorthand to the affected elements style attribute.
 
-
+<hr>
 <h3>Inside the event handler function</h3>
-Here is some information about the handlers you pass when setting events:
+Here is some information about the handles you pass when setting events:
 <h5>ScrobMaster scrollState argument</h5>
 scrollState is updated on scroll and passed in to each event method defined when trigged. 
 Property
@@ -171,5 +187,36 @@ Inside of a handler function "this" refers to the scrobject you are affecting.
 			this.style.border = "solid 2px red";
 		}
 	});
+
+</pre>
+<hr>
+<h3>Working with Classes and ScrobMaster</h3>
+<p>ScrobMaster supports registering a group of elements at the same time through the use of a CSS class selector.
+	Registering with a class selector will return a scrobarray object in the same way a scrobject would be returned. The scrobarray object has the same methods and properties as the basic scrobject. The difference is, rather than applying them to a single element, a scrobarray houses an array of nodes. (scrob.scrobarray.nodes) These nodes are essentially scrobject that prototype thier parental scrobarray.</p>
+<p>Each node has the ability to support it's own set of handles that will overide the scrobarray handles.<br />Scrobarray nodes are only available to edit after the dom has loaded.</p>
+
+example:
+<pre>
+	//register the className will construct and return a new scrobarray.
+	scrob.register('classBob');
+
+	//set the enter, exit events and trigger top for every node on the scrobarray, will again return the scrobarray
+	scrob.classBob.set({
+		"enter": function(state){this.style.backgroundColor = "blue"}, 
+			// turn blue when element is entered
+		"exit": function(state){this.style.backgroundColor = "white"}, 
+			// turn white when elemtn is exited
+		"top": -100 
+			// set trigger point to be 100px above each element
+	});
+	
+	//change the enter event for the second node after it is available for editing
+	window.onload = function(){
+		scrob.classBob.nodes[1].set("enter", funciton(state){this.style.backgroundColor = "green"});
+		// This will overwite the previously set enter event for THIS NODE ONLY.
+		// All others will function as previously defined
+		// returns the ScrobArrayNode that was called upon.
+
+	}
 
 </pre>
