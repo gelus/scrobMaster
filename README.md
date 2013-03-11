@@ -195,6 +195,8 @@ Inside of a handler function "this" refers to the scrobject you are affecting.
 	Registering with a class selector will return a scrobarray object in the same way a scrobject would be returned. The scrobarray object has the same methods and properties as the basic scrobject. The difference is, rather than applying them to a single element, a scrobarray houses an array of nodes. (scrob.scrobarray.nodes) These nodes are essentially scrobject that prototype thier parental scrobarray.</p>
 <p>Each node has the ability to support it's own set of handles that will overide the scrobarray handles.<br />Scrobarray nodes are only available to edit after the dom has loaded.</p>
 
+
+
 example:
 <pre>
 	//register the className will construct and return a new scrobarray.
@@ -205,7 +207,7 @@ example:
 		"enter": function(state){this.style.backgroundColor = "blue"}, 
 			// turn blue when element is entered
 		"exit": function(state){this.style.backgroundColor = "white"}, 
-			// turn white when elemtn is exited
+			// turn white when element is exited
 		"top": -100 
 			// set trigger point to be 100px above each element
 	});
@@ -213,7 +215,7 @@ example:
 	//change the enter event for the second node after it is available for editing
 	window.onload = function(){
 		scrob.classBob.nodes[1].set("enter", funciton(state){this.style.backgroundColor = "green"});
-		// This will overwite the previously set enter event for THIS NODE ONLY.
+		// This will overwrite the previously set enter event for THIS NODE ONLY.
 		// All others will function as previously defined
 		// returns the ScrobArrayNode that was called upon.
 
