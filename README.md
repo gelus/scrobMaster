@@ -191,9 +191,10 @@ Inside of a handler function "this" refers to the scrobject you are affecting.
 </pre>
 <hr>
 <h3>Working with Classes and ScrobMaster</h3>
-<p>ScrobMaster supports registering a group of elements at the same time through the use of a CSS class selector.
-	Registering with a class selector will return a scrobarray object in the same way a scrobject would be returned. The scrobarray object has the same methods and properties as the basic scrobject. The difference is, rather than applying them to a single element, a scrobarray houses an array of nodes. (scrob.scrobarray.nodes) These nodes are essentially scrobject that prototype thier parental scrobarray.</p>
-<p>Each node has the ability to support it's own set of handles that will overide the scrobarray handles.<br />Scrobarray nodes are only available to edit after the dom has loaded.</p>
+<p>ScrobMaster supports registering a group of elements at the same time through the use of a CSS class selector.<br />
+Registering with a class selector will return a scrobarray object; The same way a scrobject would be returned. <br />
+The scrobarray object has the same methods and properties as the basic scrobject. The difference is, rather than applying them to a single element, a scrobarray houses an array of nodes. (scrob.scrobarray.nodes) These nodes are essentially scrobject that prototype thier parental scrobarray.</p>
+<p>Each node has the ability to support it's own set of handles that will overide the scrobarray handles.<br />Scrobarray nodes are only available to edit after the DOM has loaded.</p>
 
 
 
