@@ -201,7 +201,7 @@ The scrobarray object has the same methods and properties as the basic scrobject
 example:
 <pre>
 	
-	scrob.register('classBob');
+	scrob.register('.classBob');
 	
 	scrob.classBob.set({
 		"enter": function(state){this.style.backgroundColor = "blue"}, 
