@@ -32,8 +32,6 @@ Events are executed when the page's settable trigger point enters, exits or scro
 
 <h5>Basic Use:</h5>
 <pre>
-	<script src="scrobMaster.js"></script>
-	<script>
 		//Basic Example: 
 		// Register Element with ID of bob2 as a scrobject
 		scrob.register('bob2');
@@ -51,18 +49,14 @@ Events are executed when the page's settable trigger point enters, exits or scro
 		scrob.bob2.on('exit', function(scrollState){
 			this.style.backgroundColor = "white";
 		});
-	</script>
 </pre>
 For ease of use ScrobMaster methods can be chained and most accept objects to attach multiple events and set multiple properties at once. So the above could be reduced to:
 <pre>
-	<script src="scrobMaster.js"></script>
-	<script>
 		scrob.register('bob2').set({
 			'bufferTop': -100,
 			'enter': function(scrollState){this.style.backgroundColor = (scrollState.direction == "up")? "red":"blue";},
 			'exit': function(scrollState){this.style.backgroundColor = "white";}
 		});
-	</script>
 </pre>
 Please note: In the examples above to raise the bufferEnter's trigger point a negative value was used. This is because ScrobMaster positioning is based off scrollTop, Larger numbers are further down on the page and the opposite for smaller. The top of the page being located at 0.
 <hr>
